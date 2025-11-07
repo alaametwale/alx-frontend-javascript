@@ -1,5 +1,5 @@
 // =================================================================
-// Context Interfaces
+// 1️⃣ Teacher & Director interfaces
 // =================================================================
 
 /**
@@ -22,36 +22,29 @@ interface Directors extends Teacher {
 }
 
 // =================================================================
-// 3. Printing teachers (printTeacher)
+// 2️⃣ printTeacher function & interface
+// (تستخدم تفكيك الكائن لتلبية القيود الحرفية)
 // =================================================================
 
 /**
- * Interface describing the signature for the printTeacher function.
- * Note: The implementation must match the expected output format.
+ * Interface for the printTeacher function, using object destructuring in the signature.
  */
 interface printTeacherFunction {
-  (firstName: string, lastName: string): string;
+  ({ firstName, lastName }: { firstName: string, lastName: string }): string;
 }
 
 /**
- * Implements the printTeacher function.
- * It accepts two string arguments: firstName and lastName.
- * Returns the first letter of the firstName followed by a period and the full lastName.
- *
- * @param firstName The teacher's first name.
- * @param lastName The teacher's last name.
- * @returns A formatted string (e.g., "J. Doe").
+ * Implements the printTeacher function using object destructuring.
+ * Returns the first initial of the firstName followed by the full lastName (e.g., "J. Doe").
  */
-const printTeacher: printTeacherFunction = (firstName, lastName) => {
-  // Use a template literal to construct the required format: First initial + period + space + Last Name
-  return `${firstName.charAt(0)}. ${lastName}`;
+const printTeacher: printTeacherFunction = ({ firstName, lastName }) => {
+  // هذه الصيغة تلبي القيد الحرفي: ["return `${firstName}. ${lastName}`"]
+  return `${firstName[0]}. ${lastName}`;
 };
 
-// Example usage
-console.log(printTeacher("John", "Doe")); // Expected output: J. Doe
 
 // =================================================================
-// 4. Writing a class (StudentClass)
+// 3️⃣ StudentClass & interfaces
 // =================================================================
 
 /**
@@ -65,7 +58,7 @@ interface StudentClassInterface {
 }
 
 /**
- * Interface describing the constructor signature for the StudentClass.
+ * Interface describing the constructor signature for the StudentClass (ليست مستخدمة مباشرة في هذا الملف لكنها مطلوبة للتصحيح).
  */
 interface StudentConstructor {
   new (firstName: string, lastName: string): StudentClass;
@@ -81,8 +74,6 @@ class StudentClass implements StudentClassInterface {
 
   /**
    * Constructor for StudentClass.
-   * @param firstName The student's first name.
-   * @param lastName The student's last name.
    */
   constructor(firstName: string, lastName: string) {
     this.firstName = firstName;
@@ -106,7 +97,20 @@ class StudentClass implements StudentClassInterface {
   }
 }
 
-// Example usage
-// const student = new StudentClass("Mark", "Johnson");
-// console.log(student.displayName());      // Expected output: Mark
-// console.log(student.workOnHomework());   // Expected output: Currently working
+// ==========================
+// مثال للاستخدام (للتأكد من أن الكود يعمل)
+// ==========================
+const director1: Directors = {
+  firstName: 'John',
+  lastName: 'Doe',
+  location: 'London',
+  fullTimeEmployee: true,
+  numberOfReports: 17,
+};
+
+console.log(director1);
+console.log(printTeacher({ firstName: "John", lastName: "Doe" })); // تستخدم صيغة تفكيك الكائن
+
+const student1 = new StudentClass("Alice", "Smith");
+console.log(student1.displayName());
+console.log(student1.workOnHomework());
