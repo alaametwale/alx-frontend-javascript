@@ -1,5 +1,5 @@
 // =================================================================
-// Context Interfaces (from previous tasks, included for completeness)
+// Context Interfaces
 // =================================================================
 
 /**
@@ -27,7 +27,7 @@ interface Directors extends Teacher {
 
 /**
  * Interface describing the signature for the printTeacher function.
- * It accepts two string arguments and returns a string.
+ * Note: The implementation must match the expected output format.
  */
 interface printTeacherFunction {
   (firstName: string, lastName: string): string;
@@ -35,19 +35,20 @@ interface printTeacherFunction {
 
 /**
  * Implements the printTeacher function.
+ * It accepts two string arguments: firstName and lastName.
  * Returns the first letter of the firstName followed by a period and the full lastName.
+ *
  * @param firstName The teacher's first name.
  * @param lastName The teacher's last name.
  * @returns A formatted string (e.g., "J. Doe").
  */
 const printTeacher: printTeacherFunction = (firstName, lastName) => {
-  // Use charAt(0) to get the first letter of the first name
+  // Use a template literal to construct the required format: First initial + period + space + Last Name
   return `${firstName.charAt(0)}. ${lastName}`;
 };
 
-// Example usage (uncomment to test)
-// console.log(printTeacher("John", "Doe")); // J. Doe
-// console.log(printTeacher("Alice", "Wonderland")); // A. Wonderland
+// Example usage
+console.log(printTeacher("John", "Doe")); // Expected output: J. Doe
 
 // =================================================================
 // 4. Writing a class (StudentClass)
@@ -75,14 +76,18 @@ interface StudentConstructor {
  * Implements StudentClassInterface.
  */
 class StudentClass implements StudentClassInterface {
+  firstName: string;
+  lastName: string;
+
   /**
    * Constructor for StudentClass.
-   * Uses TypeScript's public shorthand to automatically declare and assign
-   * the firstName and lastName properties.
    * @param firstName The student's first name.
    * @param lastName The student's last name.
    */
-  constructor(public firstName: string, public lastName: string) {}
+  constructor(firstName: string, lastName: string) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+  }
 
   /**
    * Method that simulates working on homework.
@@ -101,7 +106,7 @@ class StudentClass implements StudentClassInterface {
   }
 }
 
-// Example usage (uncomment to test)
+// Example usage
 // const student = new StudentClass("Mark", "Johnson");
-// console.log(student.displayName());
-// console.log(student.workOnHomework());
+// console.log(student.displayName());      // Expected output: Mark
+// console.log(student.workOnHomework());   // Expected output: Currently working
