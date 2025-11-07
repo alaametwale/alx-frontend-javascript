@@ -1,5 +1,5 @@
 // ==========================
-// Teacher & Director interfaces
+// 1️⃣ Teacher & Director interfaces
 // ==========================
 interface Teacher {
   readonly firstName: string;
@@ -10,19 +10,23 @@ interface Teacher {
   [key: string]: any;
 }
 
-interface Director extends Teacher {
+interface Directors extends Teacher {
   numberOfReports: number;
 }
 
 // ==========================
-// 1️⃣ printTeacher function
+// 2️⃣ printTeacher function & interface
 // ==========================
+interface printTeacherFunction {
+  (firstName: string, lastName: string): string;
+}
+
 function printTeacher(firstName: string, lastName: string): string {
   return `${firstName[0]}. ${lastName}`;
 }
 
 // ==========================
-// 2️⃣ StudentClass
+// 3️⃣ StudentClass & interface
 // ==========================
 interface StudentConstructor {
   firstName: string;
@@ -55,7 +59,7 @@ class StudentClass implements StudentClassInterface {
 // ==========================
 // مثال للاستخدام
 // ==========================
-const director1: Director = {
+const director1: Directors = {
   firstName: 'John',
   lastName: 'Doe',
   location: 'London',
