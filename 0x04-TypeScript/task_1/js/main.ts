@@ -1,56 +1,34 @@
 // ==========================
-// 1️⃣ Teacher & Director interfaces + printTeacher function
+// Teacher & Director interfaces
 // ==========================
-
 interface Teacher {
   readonly firstName: string;
   readonly lastName: string;
   fullTimeEmployee: boolean;
   yearsOfExperience?: number;
   location: string;
-  [key: string]: any; // Allows extra attributes
+  [key: string]: any;
 }
 
 interface Director extends Teacher {
   numberOfReports: number;
 }
 
-// Example Director object
-const director1: Director = {
-  firstName: 'John',
-  lastName: 'Doe',
-  location: 'London',
-  fullTimeEmployee: true,
-  numberOfReports: 17,
-};
-
-console.log(director1);
-
-// ---------------------------
-// printTeacher function interface
-interface printTeacherFunction {
-  (firstName: string, lastName: string): string;
+// ==========================
+// 1️⃣ printTeacher function
+// ==========================
+function printTeacher(firstName: string, lastName: string): string {
+  return `${firstName[0]}. ${lastName}`;
 }
 
-// Implement the printTeacher function
-const printTeacher: printTeacherFunction = (firstName, lastName) => {
-  return `${firstName[0]}. ${lastName}`;
-};
-
-// Example usage
-console.log(printTeacher("John", "Doe")); // Output: J. Doe
-
 // ==========================
-// 2️⃣ StudentClass + interfaces
+// 2️⃣ StudentClass
 // ==========================
-
-// Interface for constructor arguments
 interface StudentConstructor {
   firstName: string;
   lastName: string;
 }
 
-// Interface for the class
 interface StudentClassInterface {
   workOnHomework(): string;
   displayName(): string;
@@ -60,7 +38,7 @@ class StudentClass implements StudentClassInterface {
   firstName: string;
   lastName: string;
 
-  constructor({ firstName, lastName }: StudentConstructor) {
+  constructor(firstName: string, lastName: string) {
     this.firstName = firstName;
     this.lastName = lastName;
   }
@@ -74,7 +52,20 @@ class StudentClass implements StudentClassInterface {
   }
 }
 
-// Example usage
-const student1 = new StudentClass({ firstName: "Alice", lastName: "Smith" });
-console.log(student1.displayName()); // Alice
-console.log(student1.workOnHomework()); // Currently working
+// ==========================
+// مثال للاستخدام
+// ==========================
+const director1: Director = {
+  firstName: 'John',
+  lastName: 'Doe',
+  location: 'London',
+  fullTimeEmployee: true,
+  numberOfReports: 17,
+};
+
+console.log(director1);
+console.log(printTeacher("John", "Doe"));
+
+const student1 = new StudentClass("Alice", "Smith");
+console.log(student1.displayName());
+console.log(student1.workOnHomework());
