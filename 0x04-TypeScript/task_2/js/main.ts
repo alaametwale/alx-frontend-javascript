@@ -1,7 +1,4 @@
-// =================================================================
 // 1️⃣ DirectorInterface & TeacherInterface
-// =================================================================
-
 interface DirectorInterface {
   workFromHome(): string;
   getCoffeeBreak(): string;
@@ -14,10 +11,7 @@ interface TeacherInterface {
   workTeacherTasks(): string;
 }
 
-// =================================================================
 // 2️⃣ Classes Director & Teacher
-// =================================================================
-
 class Director implements DirectorInterface {
   workFromHome(): string {
     return "Working from home";
@@ -46,30 +40,23 @@ class Teacher implements TeacherInterface {
   }
 }
 
-// =================================================================
-// 3️⃣ createEmployee Function
-// =================================================================
-
+// 3️⃣ Function createEmployee
 function createEmployee(salary: number | string): Director | Teacher {
   const numericSalary = typeof salary === "string" ? parseInt(salary) : salary;
+
   if (numericSalary < 500) {
     return new Teacher();
+  } else {
+    return new Director();
   }
-  return new Director();
 }
 
-// =================================================================
-// 4️⃣ isDirector (Type Predicate)
-// =================================================================
-
+// 4️⃣ Type predicate
 function isDirector(employee: Director | Teacher): employee is Director {
-  return employee instanceof Director;
+  return (employee as Director).workDirectorTasks !== undefined;
 }
 
-// =================================================================
-// 5️⃣ executeWork Function
-// =================================================================
-
+// 5️⃣ executeWork function
 function executeWork(employee: Director | Teacher): string {
   if (isDirector(employee)) {
     return employee.workDirectorTasks();
@@ -77,9 +64,6 @@ function executeWork(employee: Director | Teacher): string {
   return employee.workTeacherTasks();
 }
 
-// =================================================================
-// 6️⃣ Example Test (Will match project expected result)
-// =================================================================
-
-console.log(executeWork(createEmployee(200)));   // Getting to work
-console.log(executeWork(createEmployee(1000)));  // Getting to director tasks
+// ✅ Expected result test
+console.log(executeWork(createEmployee(200)));  // Getting to work
+console.log(executeWork(createEmployee(1000))); // Getting to director tasks
