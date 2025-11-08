@@ -2,18 +2,12 @@
 // 1️⃣ DirectorInterface & TeacherInterface
 // =================================================================
 
-/**
- * Interface describing a Director with expected methods.
- */
 interface DirectorInterface {
   workFromHome(): string;
   getCoffeeBreak(): string;
   workDirectorTasks(): string;
 }
 
-/**
- * Interface describing a Teacher with expected methods.
- */
 interface TeacherInterface {
   workFromHome(): string;
   getCoffeeBreak(): string;
@@ -24,9 +18,6 @@ interface TeacherInterface {
 // 2️⃣ Classes Director & Teacher
 // =================================================================
 
-/**
- * Director class implementing DirectorInterface.
- */
 class Director implements DirectorInterface {
   workFromHome(): string {
     return "Working from home";
@@ -41,9 +32,6 @@ class Director implements DirectorInterface {
   }
 }
 
-/**
- * Teacher class implementing TeacherInterface.
- */
 class Teacher implements TeacherInterface {
   workFromHome(): string {
     return "Cannot work from home";
@@ -59,27 +47,39 @@ class Teacher implements TeacherInterface {
 }
 
 // =================================================================
-// 3️⃣ Function createEmployee
+// 3️⃣ createEmployee Function
 // =================================================================
 
-/**
- * Factory function that creates either a Teacher or a Director
- * based on the salary provided.
- * @param salary number or string
- * @returns Teacher or Director instance
- */
 function createEmployee(salary: number | string): Director | Teacher {
-  if (salary < 500) {
+  const numericSalary = typeof salary === "string" ? parseInt(salary) : salary;
+  if (numericSalary < 500) {
     return new Teacher();
   }
   return new Director();
 }
 
+// =================================================================
+// 4️⃣ isDirector (Type Predicate)
+// =================================================================
+
+function isDirector(employee: Director | Teacher): employee is Director {
+  return employee instanceof Director;
+}
 
 // =================================================================
-// 4️⃣ Example usage
+// 5️⃣ executeWork Function
 // =================================================================
 
-console.log(createEmployee(200));    // Teacher
-console.log(createEmployee(1000));   // Director
-console.log(createEmployee("$500")); // Director
+function executeWork(employee: Director | Teacher): string {
+  if (isDirector(employee)) {
+    return employee.workDirectorTasks();
+  }
+  return employee.workTeacherTasks();
+}
+
+// =================================================================
+// 6️⃣ Example Test (Will match project expected result)
+// =================================================================
+
+console.log(executeWork(createEmployee(200)));   // Getting to work
+console.log(executeWork(createEmployee(1000)));  // Getting to director tasks
