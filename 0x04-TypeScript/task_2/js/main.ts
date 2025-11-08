@@ -1,5 +1,5 @@
 // =================================================================
-// 1️⃣ DirectorInterface & TeacherInterface
+// 1️⃣ Interfaces for Director and Teacher tasks
 // =================================================================
 
 interface DirectorInterface {
@@ -15,37 +15,19 @@ interface TeacherInterface {
 }
 
 // =================================================================
-// 2️⃣ Classes Director & Teacher
+// 2️⃣ Classes implementing the interfaces
 // =================================================================
 
 class Director implements DirectorInterface {
   workFromHome(): string {
     return "Working from home";
   }
-
   getCoffeeBreak(): string {
     return "Getting a coffee break";
   }
-
   workDirectorTasks(): string {
     return "Getting to director tasks";
   }
 }
 
-class Teacher implements TeacherInterface {
-  workFromHome(): string {
-    return "Cannot work from home";
-  }
-
-  getCoffeeBreak(): string {
-    return "Cannot have a break";
-  }
-
-  workTeacherTasks(): string {
-    return "Getting to work";
-  }
-}
-
-// =================================================================
-// 3️⃣ Function createEmployee
-// ======================
+class Teacher implements Teac
