@@ -1,6 +1,7 @@
 // =================================================================
 // 1️⃣ Teacher & Director interfaces
 // =================================================================
+
 interface Teacher {
   readonly firstName: string;
   readonly lastName: string;
@@ -17,20 +18,20 @@ interface Directors extends Teacher {
 // =================================================================
 // 2️⃣ printTeacher function & interface
 // =================================================================
-// تعريف الدالة بصيغة Function Declaration
-function printTeacher(firstName: string, lastName: string): string {
-  return firstName[0] + '. ' + lastName;
+
+interface printTeacherFunction {
+  (firstName: string, lastName: string): string;
 }
 
-
-// يجب استخدام Function Declaration هنا
+// ✅ الدالة الآن بصيغة Function Declaration المطلوبة
 function printTeacher(firstName: string, lastName: string): string {
-  return firstName[0] + '. ' + lastName;  // Concatenation كما يطلب المدقق
+  return firstName[0] + '. ' + lastName;
 }
 
 // =================================================================
 // 3️⃣ StudentClass & interfaces
 // =================================================================
+
 interface StudentClassInterface {
   firstName: string;
   lastName: string;
@@ -72,9 +73,5 @@ const director1: Directors = {
 };
 
 console.log(director1);
-console.log(printTeacher("John", "Doe"));   // J. Doe
-console.log(printTeacher("Alice", "Smith")); // A. Smith
 
-const student1 = new StudentClass("Alice", "Smith");
-console.log(student1.displayName());
-console.log(student1.workOnHomework());
+// Testing printTeacher functio
