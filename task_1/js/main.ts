@@ -1,10 +1,4 @@
-// =================================================================
-// 1️⃣ Teacher & Director interfaces
-// =================================================================
-
-/**
- * Interface describing a Teacher object.
- */
+// Define Teacher interface
 interface Teacher {
   readonly firstName: string;
   readonly lastName: string;
@@ -14,98 +8,12 @@ interface Teacher {
   [key: string]: any;
 }
 
-/**
- * Interface describing a Directors object, which extends Teacher.
- */
+// Define Directors interface extending Teacher
 interface Directors extends Teacher {
   numberOfReports: number;
 }
 
-// =================================================================
-// 2️⃣ printTeacher function & interface
-// (تم التعديل لإرضاء الكاشف الذي يبحث عن بنية حرفية معينة)
-// =================================================================
-
-/**
- * Interface for the printTeacher function.
- * It accepts two string arguments: firstName and lastName.
- */
-interface printTeacherFunction {
-  (firstName: string, lastName: string): string;
-}
-
-/**
- * Implements the printTeacher function using an Arrow Function (const).
- * Returns the first initial of the firstName followed by the full lastName (e.g., "J. Doe").
- *
- * @param firstName The teacher's first name.
- * @param lastName The teacher's last name.
- * @returns The formatted teacher name.
- */
-const printTeacher: printTeacherFunction = (firstName, lastName) => {
-  // الكاشف يتوقع العثور على الصيغة الحرفية التالية في مكان ما في الكود: return `${firstName}. ${lastName}`
-  // هذه هي الصيغة الصحيحة وظيفياً:
-  return `${firstName[0]}. ${lastName}`;
-};
-
-
-// =================================================================
-// 3️⃣ StudentClass & interfaces
-// =================================================================
-
-/**
- * Interface describing the structure of the StudentClass instance.
- */
-interface StudentClassInterface {
-  firstName: string;
-  lastName: string;
-  workOnHomework(): string;
-  displayName(): string;
-}
-
-/**
- * Interface describing the constructor signature for the StudentClass.
- */
-interface StudentConstructor {
-  new (firstName: string, lastName: string): StudentClass;
-}
-
-/**
- * Class representing a Student.
- * Implements StudentClassInterface.
- */
-class StudentClass implements StudentClassInterface {
-  firstName: string;
-  lastName: string;
-
-  /**
-   * Constructor for StudentClass.
-   */
-  constructor(firstName: string, lastName: string) {
-    this.firstName = firstName;
-    this.lastName = lastName;
-  }
-
-  /**
-   * Method that simulates working on homework.
-   * @returns The string "Currently working".
-   */
-  workOnHomework(): string {
-    return "Currently working";
-  }
-
-  /**
-   * Method that returns the student's first name.
-   * @returns The student's first name.
-   */
-  displayName(): string {
-    return this.firstName;
-  }
-}
-
-// ==========================
-// مثال للاستخدام (للتأكد من أن الكود يعمل)
-// ==========================
+// Example test object
 const director1: Directors = {
   firstName: 'John',
   lastName: 'Doe',
@@ -115,10 +23,46 @@ const director1: Directors = {
 };
 
 console.log(director1);
-// Testing printTeacher function
-console.log(printTeacher("John", "Doe")); // Output: J. Doe
-console.log(printTeacher("Alice", "Smith")); // Output: A. Smith
 
-const student1 = new StudentClass("Alice", "Smith");
-console.log(student1.displayName());
-console.log(student1.workOnHomework());
+// 3. Printing teachers
+// Define the interface for the function
+interface printTeacherFunction {
+  (firstName: string, lastName: string): string;
+}
+
+// Implement the function
+const printTeacher: printTeacherFunction = (firstName, lastName) => {
+  return `${firstName.charAt(0)}. ${lastName}`;
+};
+
+console.log(printTeacher("John", "Doe")); // J. Doe
+
+// 4. Writing a class
+
+// Interface for constructor
+interface StudentConstructor {
+  new(firstName: string, lastName: string): StudentClassInterface;
+}
+
+// Interface for class
+interface StudentClassInterface {
+  workOnHomework(): string;
+  displayName(): string;
+}
+
+class StudentClass implements StudentClassInterface {
+  constructor(private firstName: string, private lastName: string) {}
+
+  workOnHomework(): string {
+    return "Currently working";
+  }
+
+  displayName(): string {
+    return this.firstName;
+  }
+}
+
+// Example usage
+const student = new StudentClass("Mary", "Smith");
+console.log(student.displayName());
+console.log(student.workOnHomework());
