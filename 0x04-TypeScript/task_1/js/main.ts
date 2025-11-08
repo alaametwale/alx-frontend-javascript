@@ -23,7 +23,7 @@ interface Directors extends Teacher {
 
 // =================================================================
 // 2️⃣ printTeacher function & interface
-// (تم التعديل لضمان استخدام أسماء المعاملات المطلوبة: firstName و lastName)
+// (تم التعديل لاستخدام صيغة Concatenation بدلاً من قالب السلسلة النصية)
 // =================================================================
 
 /**
@@ -43,9 +43,8 @@ interface printTeacherFunction {
  * @returns The formatted teacher name.
  */
 const printTeacher: printTeacherFunction = (firstName, lastName) => {
-  // هذا يضمن أن الدالة تستخدم أسماء المعاملات المطلوبة: firstName و lastName.
-  // المنطق المستخدم يرجع الحرف الأول فقط من الاسم الأول (المطلوب في المهمة).
-  return `${firstName[0]}. ${lastName}`;
+  // استخدام Concatenation للحرف الأول والنقطة واسم العائلة
+  return firstName[0] + '. ' + lastName;
 };
 
 
