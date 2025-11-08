@@ -23,23 +23,28 @@ interface Directors extends Teacher {
 
 // =================================================================
 // 2️⃣ printTeacher function & interface
-// (تستخدم تفكيك الكائن لتلبية القيود الحرفية)
+// (تم التعديل لاستخدام صيغة Concatenation بدلاً من قالب السلسلة النصية)
 // =================================================================
 
 /**
- * Interface for the printTeacher function, using object destructuring in the signature.
+ * Interface for the printTeacher function.
+ * It accepts two string arguments: firstName and lastName.
  */
 interface printTeacherFunction {
-  ({ firstName, lastName }: { firstName: string, lastName: string }): string;
+  (firstName: string, lastName: string): string;
 }
 
 /**
- * Implements the printTeacher function using object destructuring.
+ * Implements the printTeacher function using an Arrow Function (const).
  * Returns the first initial of the firstName followed by the full lastName (e.g., "J. Doe").
+ *
+ * @param firstName The teacher's first name.
+ * @param lastName The teacher's last name.
+ * @returns The formatted teacher name.
  */
-const printTeacher: printTeacherFunction = ({ firstName, lastName }) => {
-  // هذه الصيغة تلبي القيد الحرفي: ["return `${firstName}. ${lastName}`"]
-  return `${firstName[0]}. ${lastName}`;
+const printTeacher: printTeacherFunction = (firstName, lastName) => {
+  // استخدام Concatenation للحرف الأول والنقطة واسم العائلة
+  return firstName[0] + '. ' + lastName;
 };
 
 
@@ -58,7 +63,7 @@ interface StudentClassInterface {
 }
 
 /**
- * Interface describing the constructor signature for the StudentClass (ليست مستخدمة مباشرة في هذا الملف لكنها مطلوبة للتصحيح).
+ * Interface describing the constructor signature for the StudentClass.
  */
 interface StudentConstructor {
   new (firstName: string, lastName: string): StudentClass;
@@ -101,15 +106,17 @@ class StudentClass implements StudentClassInterface {
 // مثال للاستخدام (للتأكد من أن الكود يعمل)
 // ==========================
 const director1: Directors = {
-  firstName: 'John',
-  lastName: 'Doe',
-  location: 'London',
-  fullTimeEmployee: true,
-  numberOfReports: 17,
+  firstName: 'John',
+  lastName: 'Doe',
+  location: 'London',
+  fullTimeEmployee: true,
+  numberOfReports: 17,
 };
 
 console.log(director1);
-console.log(printTeacher({ firstName: "John", lastName: "Doe" })); // تستخدم صيغة تفكيك الكائن
+// Testing printTeacher function
+console.log(printTeacher("John", "Doe")); // Output: J. Doe
+console.log(printTeacher("Alice", "Smith")); // Output: A. Smith
 
 const student1 = new StudentClass("Alice", "Smith");
 console.log(student1.displayName());
