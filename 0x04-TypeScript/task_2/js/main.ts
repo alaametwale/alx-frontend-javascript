@@ -1,7 +1,4 @@
-// =================================================================
-// 1️⃣ Interfaces for Director and Teacher tasks
-// =================================================================
-
+// 1️⃣ DirectorInterface & TeacherInterface
 interface DirectorInterface {
   workFromHome(): string;
   getCoffeeBreak(): string;
@@ -14,20 +11,45 @@ interface TeacherInterface {
   workTeacherTasks(): string;
 }
 
-// =================================================================
-// 2️⃣ Classes implementing the interfaces
-// =================================================================
-
+// 2️⃣ Classes Director & Teacher
 class Director implements DirectorInterface {
   workFromHome(): string {
     return "Working from home";
   }
+
   getCoffeeBreak(): string {
     return "Getting a coffee break";
   }
+
   workDirectorTasks(): string {
     return "Getting to director tasks";
   }
 }
 
-class Teacher implements Teac
+class Teacher implements TeacherInterface {
+  workFromHome(): string {
+    return "Cannot work from home";
+  }
+
+  getCoffeeBreak(): string {
+    return "Cannot have a break";
+  }
+
+  workTeacherTasks(): string {
+    return "Getting to work";
+  }
+}
+
+// 3️⃣ Function createEmployee
+function createEmployee(salary: number | string): Director | Teacher {
+  if (typeof salary === "number" && salary < 500) {
+    return new Teacher();
+  } else {
+    return new Director();
+  }
+}
+
+// 4️⃣ Example usage
+console.log(createEmployee(200));    // Teacher
+console.log(createEmployee(1000));   // Director
+console.log(createEmployee("$500")); // Director
