@@ -23,7 +23,7 @@ interface Directors extends Teacher {
 
 // =================================================================
 // 2️⃣ printTeacher function & interface
-// (تم التعديل لاستخدام توقيع دالة قياسي لتلبية قيود نظام التصحيح)
+// (تم التعديل لاستخدام دالة سهمية مطبقة على الواجهة)
 // =================================================================
 
 /**
@@ -35,17 +35,17 @@ interface printTeacherFunction {
 }
 
 /**
- * Implements the printTeacher function using the 'function' keyword.
+ * Implements the printTeacher function using an Arrow Function (const).
  * Returns the first initial of the firstName followed by the full lastName (e.g., "J. Doe").
  *
  * @param firstName The teacher's first name.
  * @param lastName The teacher's last name.
  * @returns The formatted teacher name.
  */
-function printTeacher(firstName: string, lastName: string): string {
-  // استخدام التوقيع لطباعة الحرف الأول من الاسم الأول والاسم الأخير الكامل.
+const printTeacher: printTeacherFunction = (firstName, lastName) => {
+  // استخدام الحرف الأول من الاسم الأول والاسم الأخير الكامل.
   return `${firstName[0]}. ${lastName}`;
-}
+};
 
 
 // =================================================================
@@ -114,7 +114,7 @@ const director1: Directors = {
 };
 
 console.log(director1);
-// Testing printTeacher function (now accepts two string arguments)
+// Testing printTeacher function
 console.log(printTeacher("John", "Doe")); // Output: J. Doe
 console.log(printTeacher("Alice", "Smith")); // Output: A. Smith
 
