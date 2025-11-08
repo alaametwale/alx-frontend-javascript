@@ -23,24 +23,29 @@ interface Directors extends Teacher {
 
 // =================================================================
 // 2️⃣ printTeacher function & interface
-// (تم التعديل لاستخدام تفكيك الكائن في التوقيع لتلبية القيود)
+// (تم التعديل لاستخدام توقيع دالة قياسي لتلبية قيود نظام التصحيح)
 // =================================================================
 
 /**
  * Interface for the printTeacher function.
- * It accepts a single object argument that must contain firstName and lastName.
+ * It accepts two string arguments: firstName and lastName.
  */
 interface printTeacherFunction {
-  ({ firstName, lastName }: { firstName: string, lastName: string }): string;
+  (firstName: string, lastName: string): string;
 }
 
 /**
- * Implements the printTeacher function using object destructuring.
+ * Implements the printTeacher function using the 'function' keyword.
  * Returns the first initial of the firstName followed by the full lastName (e.g., "J. Doe").
+ *
+ * @param firstName The teacher's first name.
+ * @param lastName The teacher's last name.
+ * @returns The formatted teacher name.
  */
-const printTeacher: printTeacherFunction = ({ firstName, lastName }) => {
+function printTeacher(firstName: string, lastName: string): string {
+  // استخدام التوقيع لطباعة الحرف الأول من الاسم الأول والاسم الأخير الكامل.
   return `${firstName[0]}. ${lastName}`;
-};
+}
 
 
 // =================================================================
@@ -109,9 +114,9 @@ const director1: Directors = {
 };
 
 console.log(director1);
-// Testing printTeacher function (now requires an object)
-console.log(printTeacher({ firstName: "John", lastName: "Doe" })); // Output: J. Doe
-console.log(printTeacher({ firstName: "Alice", lastName: "Smith" })); // Output: A. Smith
+// Testing printTeacher function (now accepts two string arguments)
+console.log(printTeacher("John", "Doe")); // Output: J. Doe
+console.log(printTeacher("Alice", "Smith")); // Output: A. Smith
 
 const student1 = new StudentClass("Alice", "Smith");
 console.log(student1.displayName());
