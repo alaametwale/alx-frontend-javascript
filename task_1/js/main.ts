@@ -1,4 +1,7 @@
-// Define Teacher interface
+// =================================================================
+// 1️⃣ Teacher & Director interfaces
+// =================================================================
+
 interface Teacher {
   readonly firstName: string;
   readonly lastName: string;
@@ -8,52 +11,43 @@ interface Teacher {
   [key: string]: any;
 }
 
-// Define Directors interface extending Teacher
 interface Directors extends Teacher {
   numberOfReports: number;
 }
 
-const director1: Directors = {
-  firstName: 'John',
-  lastName: 'Doe',
-  location: 'London',
-  fullTimeEmployee: true,
-  numberOfReports: 17,
-};
+// =================================================================
+// 2️⃣ printTeacher function & interface
+// =================================================================
 
-console.log(director1);
-
-// 3. Printing teachers
-// Interface for the printTeacher function
 interface printTeacherFunction {
   (firstName: string, lastName: string): string;
 }
 
-// printTeacher function
+// تعريف الدالة بصيغة Function Declaration
 function printTeacher(firstName: string, lastName: string): string {
-  return `${firstName.charAt(0)}. ${lastName}`;
+  return firstName[0] + '. ' + lastName;
 }
 
-console.log(printTeacher("John", "Doe"));
+// =================================================================
+// 3️⃣ StudentClass & interfaces
+// =================================================================
 
-// 4. Writing a class
-// Interface describing constructor argument
-interface StudentClassConstructor {
+interface StudentClassInterface {
   firstName: string;
   lastName: string;
-}
-
-// Interface describing the class
-interface StudentClassInterface {
   workOnHomework(): string;
   displayName(): string;
+}
+
+interface StudentConstructor {
+  new (firstName: string, lastName: string): StudentClass;
 }
 
 class StudentClass implements StudentClassInterface {
   firstName: string;
   lastName: string;
 
-  constructor({ firstName, lastName }: StudentClassConstructor) {
+  constructor(firstName: string, lastName: string) {
     this.firstName = firstName;
     this.lastName = lastName;
   }
@@ -67,6 +61,21 @@ class StudentClass implements StudentClassInterface {
   }
 }
 
-const student = new StudentClass({ firstName: "Mary", lastName: "Smith" });
-console.log(student.displayName());
-console.log(student.workOnHomework());
+// ==========================
+// مثال للاستخدام
+// ==========================
+const director1: Directors = {
+  firstName: 'John',
+  lastName: 'Doe',
+  location: 'London',
+  fullTimeEmployee: true,
+  numberOfReports: 17,
+};
+
+console.log(director1);
+console.log(printTeacher("John", "Doe")); // J. Doe
+console.log(printTeacher("Alice", "Smith")); // A. Smith
+
+const student1 = new StudentClass("Alice", "Smith");
+console.log(student1.displayName());
+console.log(student1.workOnHomework());
