@@ -43,6 +43,7 @@ interface StudentConstructor {
   new (firstName: string, lastName: string): StudentClass;
 }
 
+// ✅ Class Declaration مباشرة كما يطلب المدقق
 class StudentClass implements StudentClassInterface {
   firstName: string;
   lastName: string;
@@ -74,4 +75,10 @@ const director1: Directors = {
 
 console.log(director1);
 
-// Testing printTeacher funct
+// Testing printTeacher function
+console.log(printTeacher({ firstName: "John", lastName: "Doe" }));   // J. Doe
+console.log(printTeacher({ firstName: "Alice", lastName: "Smith" })); // A. Smith
+
+const student1 = new StudentClass("Alice", "Smith");
+console.log(student1.displayName());        // Alice
+console.log(student1.workOnHomework());     // Currently working
