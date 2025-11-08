@@ -23,7 +23,7 @@ interface Directors extends Teacher {
 
 // =================================================================
 // 2️⃣ printTeacher function & interface
-// (تم التعديل لتجنب التوقعات الحرفية المفرطة في نظام التصحيح)
+// (تم التعديل لضمان استخدام أسماء المعاملات المطلوبة: firstName و lastName)
 // =================================================================
 
 /**
@@ -42,9 +42,10 @@ interface printTeacherFunction {
  * @param lastName The teacher's last name.
  * @returns The formatted teacher name.
  */
-const printTeacher: printTeacherFunction = (fN, lastName) => {
-  // fN هنا هو الاسم الأول، وتم تغيير اسمه في التوقيع لتجنب القيد الحرفي المزعج.
-  return `${fN[0]}. ${lastName}`;
+const printTeacher: printTeacherFunction = (firstName, lastName) => {
+  // هذا يضمن أن الدالة تستخدم أسماء المعاملات المطلوبة: firstName و lastName.
+  // المنطق المستخدم يرجع الحرف الأول فقط من الاسم الأول (المطلوب في المهمة).
+  return `${firstName[0]}. ${lastName}`;
 };
 
 
