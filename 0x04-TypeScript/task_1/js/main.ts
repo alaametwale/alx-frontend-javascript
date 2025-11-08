@@ -17,36 +17,27 @@ interface Directors extends Teacher {
 // ==========================
 // 2️⃣ printTeacher function & interface
 // ==========================
-/**
- * Interface for the printTeacher function
- */
 interface printTeacherFunction {
   (firstName: string, lastName: string): string;
 }
 
-/**
- * Implements the printTeacher function
- * Returns the first initial of the firstName followed by the full lastName (e.g., "J. Doe").
- */
-const printTeacher: printTeacherFunction = (firstName: string, lastName: string): string => {
+// هنا نستخدم الشكل الكلاسيكي المطلوب
+function printTeacher(firstName: string, lastName: string): string {
   return `${firstName[0]}. ${lastName}`;
-};
+}
 
 // ==========================
 // 3️⃣ StudentClass & interfaces
 // ==========================
+interface StudentConstructor {
+  new (firstName: string, lastName: string): StudentClass;
+}
+
 interface StudentClassInterface {
   workOnHomework(): string;
   displayName(): string;
 }
 
-interface StudentConstructor {
-  new (firstName: string, lastName: string): StudentClassInterface;
-}
-
-/**
- * Class representing a Student
- */
 class StudentClass implements StudentClassInterface {
   firstName: string;
   lastName: string;
@@ -66,26 +57,19 @@ class StudentClass implements StudentClassInterface {
 }
 
 // ==========================
-// ✅ Example usage (اختياري للتجربة)
+// أمثلة للاختبار
 // ==========================
-const teacher1: Teacher = {
-  firstName: "John",
-  lastName: "Doe",
-  fullTimeEmployee: true,
-  location: "London",
-  contract: false,
-};
-
 const director1: Directors = {
-  firstName: "Jane",
-  lastName: "Smith",
-  location: "New York",
+  firstName: 'John',
+  lastName: 'Doe',
+  location: 'London',
   fullTimeEmployee: true,
-  numberOfReports: 10,
+  numberOfReports: 17,
 };
 
-console.log(printTeacher("John", "Doe")); // "J. Doe"
+console.log(director1);
+console.log(printTeacher("John", "Doe"));
 
-const student = new StudentClass("Alice", "Johnson");
-console.log(student.displayName()); // "Alice"
-console.log(student.workOnHomework()); // "Currently working"
+const student1 = new StudentClass("Alice", "Smith");
+console.log(student1.displayName());
+console.log(student1.workOnHomework());
