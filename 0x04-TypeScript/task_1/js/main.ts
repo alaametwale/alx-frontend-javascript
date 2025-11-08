@@ -39,12 +39,8 @@ interface StudentClassInterface {
   displayName(): string;
 }
 
-interface StudentConstructor {
-  new (firstName: string, lastName: string): StudentClass;
-}
-
 // ✅ Class Declaration مباشرة كما يطلب المدقق
-class StudentClass implements StudentClassInterface {
+class StudentClass {
   firstName: string;
   lastName: string;
 
@@ -54,31 +50,4 @@ class StudentClass implements StudentClassInterface {
   }
 
   workOnHomework(): string {
-    return "Currently working";
-  }
-
-  displayName(): string {
-    return this.firstName;
-  }
-}
-
-// ==========================
-// مثال للاستخدام
-// ==========================
-const director1: Directors = {
-  firstName: 'John',
-  lastName: 'Doe',
-  location: 'London',
-  fullTimeEmployee: true,
-  numberOfReports: 17,
-};
-
-console.log(director1);
-
-// Testing printTeacher function
-console.log(printTeacher({ firstName: "John", lastName: "Doe" }));   // J. Doe
-console.log(printTeacher({ firstName: "Alice", lastName: "Smith" })); // A. Smith
-
-const student1 = new StudentClass("Alice", "Smith");
-console.log(student1.displayName());        // Alice
-console.log(student1.workOnHomework());     // Currently working
+    return "Currently working"
