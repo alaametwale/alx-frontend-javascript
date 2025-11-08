@@ -21,8 +21,8 @@ interface printTeacherFunction {
   (firstName: string, lastName: string): string;
 }
 
-// هنا نستخدم الشكل الكلاسيكي المطلوب
-function printTeacher(firstName: string, lastName: string): string {
+// استخدم تفكيك الكائن + شكل التصريح الكلاسيكي
+function printTeacher({ firstName, lastName }: { firstName: string, lastName: string }): string {
   return `${firstName[0]}. ${lastName}`;
 }
 
@@ -57,7 +57,7 @@ class StudentClass implements StudentClassInterface {
 }
 
 // ==========================
-// أمثلة للاختبار
+// أمثلة اختبار
 // ==========================
 const director1: Directors = {
   firstName: 'John',
@@ -68,7 +68,7 @@ const director1: Directors = {
 };
 
 console.log(director1);
-console.log(printTeacher("John", "Doe"));
+console.log(printTeacher({ firstName: "John", lastName: "Doe" }));
 
 const student1 = new StudentClass("Alice", "Smith");
 console.log(student1.displayName());
