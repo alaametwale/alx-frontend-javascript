@@ -69,12 +69,12 @@ class Teacher implements TeacherInterface {
  * @returns Teacher or Director instance
  */
 function createEmployee(salary: number | string): Director | Teacher {
-  if (typeof salary === "number" && salary < 500) {
+  if (salary < 500) {
     return new Teacher();
-  } else {
-    return new Director();
   }
+  return new Director();
 }
+
 
 // =================================================================
 // 4️⃣ Example usage
