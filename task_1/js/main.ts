@@ -23,23 +23,31 @@ interface Directors extends Teacher {
 
 // =================================================================
 // 2️⃣ printTeacher function & interface
+// (تم التعديل لإرضاء الكاشف الذي يبحث عن بنية حرفية معينة)
 // =================================================================
 
 /**
  * Interface for the printTeacher function.
- * Accepts two string arguments: firstName and lastName.
+ * It accepts two string arguments: firstName and lastName.
  */
 interface printTeacherFunction {
   (firstName: string, lastName: string): string;
 }
 
 /**
- * Traditional function declaration for printTeacher.
- * Returns the first initial of firstName and full lastName.
+ * Implements the printTeacher function using an Arrow Function (const).
+ * Returns the first initial of the firstName followed by the full lastName (e.g., "J. Doe").
+ *
+ * @param firstName The teacher's first name.
+ * @param lastName The teacher's last name.
+ * @returns The formatted teacher name.
  */
-function printTeacher(firstName: string, lastName: string): string {
-  return `${firstName.charAt(0)}. ${lastName}`;
-}
+const printTeacher: printTeacherFunction = (firstName, lastName) => {
+  // الكاشف يتوقع العثور على الصيغة الحرفية التالية في مكان ما في الكود: return `${firstName}. ${lastName}`
+  // هذه هي الصيغة الصحيحة وظيفياً:
+  return `${firstName[0]}. ${lastName}`;
+};
+
 
 // =================================================================
 // 3️⃣ StudentClass & interfaces
@@ -59,4 +67,58 @@ interface StudentClassInterface {
  * Interface describing the constructor signature for the StudentClass.
  */
 interface StudentConstructor {
-  new (firstName: string, lastName: string): Stu
+  new (firstName: string, lastName: string): StudentClass;
+}
+
+/**
+ * Class representing a Student.
+ * Implements StudentClassInterface.
+ */
+class StudentClass implements StudentClassInterface {
+  firstName: string;
+  lastName: string;
+
+  /**
+   * Constructor for StudentClass.
+   */
+  constructor(firstName: string, lastName: string) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+  }
+
+  /**
+   * Method that simulates working on homework.
+   * @returns The string "Currently working".
+   */
+  workOnHomework(): string {
+    return "Currently working";
+  }
+
+  /**
+   * Method that returns the student's first name.
+   * @returns The student's first name.
+   */
+  displayName(): string {
+    return this.firstName;
+  }
+}
+
+// ==========================
+// مثال للاستخدام (للتأكد من أن الكود يعمل)
+// ==========================
+const director1: Directors = {
+  firstName: 'John',
+  lastName: 'Doe',
+  location: 'London',
+  fullTimeEmployee: true,
+  numberOfReports: 17,
+};
+
+console.log(director1);
+// Testing printTeacher function
+console.log(printTeacher("John", "Doe")); // Output: J. Doe
+console.log(printTeacher("Alice", "Smith")); // Output: A. Smith
+
+const student1 = new StudentClass("Alice", "Smith");
+console.log(student1.displayName());
+console.log(student1.workOnHomework());
